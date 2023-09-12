@@ -11,22 +11,21 @@ Welcome to the Multiple Robots project!
 
 
 ## Robots
-
+This project involves the use of three robots:
  - Robot 1
  - Robot 2
  - Robot 3
 
-used two wheel and Lidar (Light Detection and Ranging )
+Each of these robots is equipped with a two-wheel drive system and Lidar (Light Detection and Ranging) for sensing.
 
 ## Description 
-This Autonomous mobile robot with diff drive ,I built it by  `URDF`, build map and implementation in gazebo .
+These autonomous mobile robots are built using the URDF (Unified Robot Description Format) and are designed for mapping and navigation in a simulated environment using Gazebo. Here are the key components and functionalities:
 
-Used `gmapping pkg` provides laser-based SLAM (Simultaneous Localization and Mapping) to create a 2D occupancy grid map .
+- *Mapping*: The project utilizes the `gmapping` package to perform laser-based SLAM (Simultaneous Localization and Mapping), creating a 2D occupancy grid map.
 
-Then Used `AMCL` to localization robot moving in the map.
+- *Localization*: The robots are localized within the map using the `AMCL` (Adaptive Monte Carlo Localization) algorithm.
 
-I used Navigation stack its used to enable robots to autonomously navigate and move in their environments while avoiding obstacles and reaching target locations.
- i used using the `move_base package` ,and A* algorithm 
+- *Navigation*: To enable autonomous navigation, the project employs the Navigation stack, allowing the robots to move autonomously in their environments while avoiding obstacles and reaching target locations. This navigation stack utilizes the `move_base` package and the A* algorithm for path planning. 
 
 
 ## Installation
@@ -44,7 +43,7 @@ $ cd ~/catkin_ws/src
 ```bash
    git clone https://github.com/sherif1152/multiple-robots.git
 ```
-3. 
+3. Build the workspace:
 ```
 $ cd ..
 $ catkin_make
