@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!-- No namespace here as we will share this description.
+       Access with slash at the beginning -->
+  <param name="robot_description" command="$(find xacro)/xacro  '$(find description_pkg)/urdf/robots.xacro'"/>  
+  
+  
+    <!-- start world   -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find description_pkg)/worlds/wall.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+    
+  <!-- BEGIN ROBOT 1-->
+  <group ns="robot1">
+    <param name="tf_prefix" value="robot1" />
+
+    <include file="$(find description_pkg)/launch/one_robot.launch" >
+      <arg name="init_pose" value="-x 0 -y 1 -z 0" />
+      <arg name="robot_name"  value="robot1" />
+    </include>
+  </group>
+
+  <!-- BEGIN ROBOT 2-->
+  <group ns="robot2">
+    <param name="tf_prefix" value="robot2" />
+    <include file="$(find description_pkg)/launch/one_robot.launch" >
+      <arg name="init_pose" value="-x 0 -y 5 -z 0" />
+      <arg name="robot_name"  value="robot2" />
+    </include>
+  </group>
+
+  <!-- BEGIN ROBOT 3-->
+  <group ns="robot3">
+    <param name="tf_prefix" value="robot3" />
+    <include file="$(find description_pkg)/launch/one_robot.launch" >
+      <arg name="init_pose" value="-x 0 -y -4 -z 0" />
+      <arg name="robot_name"  value="robot3" />
+    </include>
+  </group>
+
+</launch>

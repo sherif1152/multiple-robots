@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Arguments -->
+  <arg name="map_file" default="$(find navigtion_pkg)/maps/map.yaml"/>
+  <arg name="open_rviz" default="true"/>
+  <arg name="move_forward_only" default="true"/>
+
+  <arg name="first_tb3"  default="robot1"/>
+  <arg name="second_tb3" default="robot2"/>
+  <arg name="third_tb3" default="robot3"/>
+  <param name="/use_sim_time" value="true"/>
+
+  <group ns = "robot1">
+   <param name="tf_prefix" value="robot1"/>
+   <!-- Map server -->
+	   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)">
+	    <param name="frame_id" value="map" />
+	   </node>
+   <!-- AMCL -->
+   	<include file="$(find navigtion_pkg)/launch/amcl_robot1.launch"/>
+   <!-- Move base -->
+	   <include file="$(find navigtion_pkg)/launch/move_base_robot1.launch">
+	    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+	   </include>
+  </group>
+
+  <group ns = "robot2">
+  <param name="tf_prefix" value="robot2"/>
+     <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)">
+    	<param name="frame_id" value="map" />
+    </node>
+   <!-- AMCL -->
+   <include file="$(find navigtion_pkg)/launch/amcl_robot2.launch"/>
+   <!-- Move base -->
+  <include file="$(find navigtion_pkg)/launch/move_base_robot2.launch">
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+   </include>
+  </group>
+  <!--  -->
+    <group ns = "robot3">
+  <param name="tf_prefix" value="robot3"/>
+     <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)">
+    	<param name="frame_id" value="map" />
+    </node>
+   <!-- AMCL -->
+   <include file="$(find navigtion_pkg)/launch/amcl_robot3.launch"/>
+   <!-- Move base -->
+   <include file="$(find navigtion_pkg)/launch/move_base_robot3.launch">
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+   </include>
+  </group>
+  
+  <!-- rviz -->
+  <group if="$(arg open_rviz)"> 
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+          args="-d $(find navigtion_pkg)/rviz/multi_navigation.rviz"/>
+  </group>
+
+</launch>

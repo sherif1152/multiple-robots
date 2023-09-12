@@ -1,0 +1,23 @@
+global_costmap:
+  #Set the global and robot frames for the costmap
+  global_frame: map
+  robot_base_frame: base_link
+
+  #Set the update and publish frequency of the costmap
+  update_frequency: 5.0
+  publish_frequency: 10.0
+
+  #We'll use a map served by the map_server to initialize this costmap
+  static_map: true
+  rolling_window: false 
+  transform_tolerance: 0.5 
+  
+  plugins:
+     - {name: static_layer,            type: "costmap_2d::StaticLayer"} #static map
+
+     - {name: laser_layer,             type: "costmap_2d::ObstacleLayer"} #laser use on walls and objects
+
+     - {name: inflation_layer,         type: "costmap_2d::InflationLayer"} #inflation layer
+
+  
+
